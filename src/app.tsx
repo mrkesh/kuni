@@ -1,12 +1,14 @@
+import { deburr, lowerCase } from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import Country from './model/country';
 import Datagrid from './component/datagrid/datagrid';
 import { Input } from './component/input/input';
 
-function mapStateToProps(state: any): { countries: Country[] } {
+function mapStateToProps(state: any): { countries: Country[], textFilter: string } {
   return {
-    countries: state.countries
+    countries: state.countries,
+    textFilter: state.filter
   };
 };
 
@@ -26,6 +28,7 @@ const columns = [
 
 interface AppProps {
   countries: Country[],
+  textFilter: string | null,
   filterCountry: (value: string) => void
 }
 
@@ -33,13 +36,14 @@ class App extends React.Component<AppProps> {
 
   render() {
 
-    const { countries, filterCountry } = this.props;
+    const { countries, textFilter, filterCountry } = this.props;
+    const data = textFilter ? countries.filter((country: Country) => lowerCase(deburr(country.name)).startsWith(lowerCase(textFilter))) : countries;  
 
     return (
       <main>
         <Input onFilter={filterCountry} />
         <Datagrid 
-          rows={countries}
+          rows={data}
           columns={columns} />
       </main>
     );
