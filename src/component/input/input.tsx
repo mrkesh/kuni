@@ -1,13 +1,17 @@
 import React from "react";
 
 interface InputProps {
-  onFilter: (value: string) => void
+  onFilter: (value: string | null) => void
 }
 
 export class Input extends React.Component<InputProps> {
 
-  onChange = (event: any) => {
+  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.props.onFilter(event.target.value);
+  };
+
+  onClick = (event: React.MouseEvent) => {
+    this.props.onFilter(null);
   };
 
   render() {
@@ -15,6 +19,7 @@ export class Input extends React.Component<InputProps> {
     return (
       <div>
         <input onChange={this.onChange} />
+        <button onClick={this.onClick}>Reset</button>
       </div>
     );
 

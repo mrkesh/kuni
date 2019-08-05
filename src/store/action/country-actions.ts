@@ -12,3 +12,7 @@ export function loadCountries(): any {
 export function countriesLoaded(countries: Country[]) {
   return { type: 'COUNTRIES_LOADED', countries };
 }
+
+export function filterCountry(value: string) {
+  return { type: 'FILTER_COUNTRIES', filter: value };
+}

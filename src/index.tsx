@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './store/reducer/root';
-import App from './app';
+import Root from './root';
 import './index.css';
 import { loadCountries } from './store/action/country-actions';
 
@@ -16,8 +16,7 @@ const store = createStore(
 store.dispatch(loadCountries());
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App/>
-  </Provider>,
+  <Root store={store} />,
   document.getElementById('root')
 );
+

@@ -1,0 +1,23 @@
+#list-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+#list-item {
+  width: 150px;
+  margin-bottom: 16px;
+}
+
+#list-item img {
+  display: block;
+  margin: 0 auto;
+  height: 60px;
+}
+
+#list-item > p {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 4px;
+  text-align: center;
+}

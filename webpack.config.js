@@ -13,7 +13,8 @@ module.exports = {
     extensions: [".js", ".json", ".ts", ".tsx"],
   },
   devServer: {
-    contentBase: path.join(__dirname,'src')
+    contentBase: path.join(__dirname,'src'),
+    historyApiFallback: true
   },
   module: {
     rules: [

@@ -3,7 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Country from './model/country';
 import Datagrid from './component/datagrid/datagrid';
+import List from './component/list/list';
 import { Input } from './component/input/input';
+import { filterCountry } from './store/action/country-actions';
 
 function mapStateToProps(state: any): { countries: Country[], textFilter: string } {
   return {
@@ -12,11 +14,9 @@ function mapStateToProps(state: any): { countries: Country[], textFilter: string
   };
 };
 
-function mapDispatchToProps(dispatch: any) {
-  return {
-    filterCountry: (value: string) => dispatch({ type: 'FILTER_COUNTRIES', filter: value }),
-  }
-}
+const mapDispatchToProps = {
+  filterCountry
+};
 
 const columns = [
   { label: 'Flag', property: 'flag', type: 'image' },
@@ -29,7 +29,7 @@ const columns = [
 interface AppProps {
   countries: Country[],
   textFilter: string | null,
-  filterCountry: (value: string) => void
+  filterCountry: (value: string | null) => void
 }
 
 class App extends React.Component<AppProps> {
@@ -41,10 +41,13 @@ class App extends React.Component<AppProps> {
 
     return (
       <main>
-        <Input onFilter={filterCountry} />
-        <Datagrid 
+        
+          <Input onFilter={filterCountry} />
+          <List data={data} />
+        
+        {/* <Datagrid 
           rows={data}
-          columns={columns} />
+          columns={columns} /> */}
       </main>
     );
   }
