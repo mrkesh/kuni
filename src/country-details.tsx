@@ -1,4 +1,3 @@
-import { deburr, lowerCase } from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { match } from 'react-router';
@@ -24,15 +23,15 @@ class CountryDetails extends React.Component<DetailsProps> {
     let countryParam = match.params.country;
 
     let activeCountry: Country | undefined = countries.find(country => {
-      return deburr(lowerCase(country.name)) === countryParam;
+      return country.id === countryParam;
     });
 
     if (!activeCountry) {
       return <p>No Match</p>
     }
 
-    let previousLink = deburr(lowerCase(countries[countries.indexOf(activeCountry) - 1].name));
-    let nextLink = deburr(lowerCase(countries[countries.indexOf(activeCountry) - 1].name));
+    let previousLink = countries[countries.indexOf(activeCountry) - 1].id;
+    let nextLink = countries[countries.indexOf(activeCountry) - 1].id;
 
     return (
       <div>

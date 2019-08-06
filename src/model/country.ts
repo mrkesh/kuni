@@ -1,6 +1,9 @@
-import Continent from './continent';
+import { deburr, lowerCase } from 'lodash';
+import { CountryDataJSON } from '../service/country-service';
 
 export default class Country {
+
+  id: string;
 
   name: string;
 
@@ -12,9 +15,10 @@ export default class Country {
 
   population: number;
 
-  region: Continent;
+  region: string;
 
-  constructor(name: string, capital: string, area: number, population: number, region: Continent, flag: string) {
+  constructor(id: string, name: string, capital: string, area: number, population: number, region: string, flag: string) {
+    this.id = id;
     this.name = name;
     this.capital = capital;
     this.area = area;
@@ -23,23 +27,20 @@ export default class Country {
     this.flag = flag;
   }
 
-  static fromJSON(jsonData: any[]): Country[] {
+  static fromJSON(jsonData: CountryDataJSON[]): Country[] {
 
-    let countryList: Country[] = [];
-
-    for (let i = 0; i < jsonData.length; i++) {
-      let country = new Country(
-        jsonData[i].name,
-        jsonData[i].capital,
-        jsonData[i].area,
-        jsonData[i].population,
-        jsonData[i].region,
-        jsonData[i].flag
+    return jsonData.map((jsonObj) => {
+      return new Country(
+        deburr(lowerCase(jsonObj.name)),
+        jsonObj.name,
+        jsonObj.capital,
+        jsonObj.area,
+        jsonObj.population,
+        jsonObj.region,
+        jsonObj.flag
       );
-
-      countryList.push(country);
-    }
-
-    return countryList;
+    });
+    
   }
+
 }

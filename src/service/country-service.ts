@@ -1,6 +1,6 @@
 import Country from '../model/country';
 
-interface CountryDataJSON {
+export interface CountryDataJSON {
   alpha3Code: string,
   area: number,
   borders: string[],

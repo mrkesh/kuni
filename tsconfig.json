@@ -2,11 +2,14 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
+		"alwaysStrict": true,
 		"esModuleInterop": true,
 		"jsx": "react",
 		"lib": ["es6", "dom"],
 		"moduleResolution": "node",
 		"noEmit": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
 		"strict": true,
 		"target": "es5"
 	},
