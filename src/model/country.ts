@@ -17,6 +17,10 @@ export default class Country {
 
   region: string;
 
+  get density(): number {
+    return this.population / this.area;
+  }
+
   constructor(id: string, name: string, capital: string, area: number, population: number, region: string, flag: string) {
     this.id = id;
     this.name = name;

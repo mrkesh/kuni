@@ -5,4 +5,4 @@ import filter from './filter-reducer';
 export default combineReducers({
   countries,
   filter
-})
+});

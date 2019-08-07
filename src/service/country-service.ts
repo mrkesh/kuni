@@ -1,16 +1,16 @@
 import Country from '../model/country';
 
 export interface CountryDataJSON {
-  alpha3Code: string,
-  area: number,
-  borders: string[],
-  capital: string,
-  flag: string,
-  name: string,
-  population: number,
-  region: string,
-  subregion: string,
-  timezones: string[]
+  alpha3Code: string;
+  area: number;
+  borders: string[];
+  capital: string;
+  flag: string;
+  name: string;
+  population: number;
+  region: string;
+  subregion: string;
+  timezones: string[];
 }
 
 export async function getCountries(): Promise<Country[]> {

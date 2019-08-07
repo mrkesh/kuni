@@ -6,12 +6,12 @@ import List from './component/list/list';
 import { Input } from './component/input/input';
 import { filterCountry } from './store/action/country-actions';
 
-function mapStateToProps(state: any): { countries: Country[], textFilter: string | null } {
+function mapStateToProps(state: { countries: Country[], filter: string | null}): { countries: Country[], textFilter: string | null } {
   return {
     countries: state.countries,
     textFilter: state.filter
   };
-};
+}
 
 const mapDispatchToProps = {
   filterCountry

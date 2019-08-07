@@ -19,9 +19,15 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: "pre",
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: "eslint-loader"
+      },
+      {
         // this is so that we can compile any React,
         // ES6 and above into normal ES5 syntax
-        test: /\.(ts|js)x?$/,
+        test: /\.tsx?$/,
         // we do not want anything from node_modules to be compiled
         exclude: /node_modules/,
         use: ['babel-loader']

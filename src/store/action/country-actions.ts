@@ -7,7 +7,7 @@ export enum CountryAction {
   FILTER_COUNTRIES = 'FILTER_COUNTRIES'
 }
 
-export function loadCountries(): any {
+export function loadCountries(): (dispatch: Dispatch) => Promise<void> {
   return async function(dispatch: Dispatch): Promise<void> {
     const countries = await getCountries();
     dispatch(countriesLoaded(countries));

@@ -5,21 +5,21 @@ import Country from './model/country';
 import { Link } from 'react-router-dom';
 
 interface DetailsProps {
-  match: match< { [country: string]: string }>,
-  countries: Country[],
+  match: match< { [country: string]: string }>;
+  countries: Country[];
 }
 
-function mapStateToProps(state: any): { countries: Country[] } {
+function mapStateToProps(state: { countries: Country[] }): { countries: Country[] } {
   return {
     countries: state.countries
   };
-};
+}
 
 class CountryDetails extends React.Component<DetailsProps> {
 
   render() {
 
-    let { countries, match } = this.props;
+    const { countries, match } = this.props;
     let countryParam = match.params.country;
 
     let activeCountry: Country | undefined = countries.find(country => {
@@ -27,11 +27,12 @@ class CountryDetails extends React.Component<DetailsProps> {
     });
 
     if (!activeCountry) {
-      return <p>No Match</p>
+      return <p>No Match</p>;
     }
 
-    let previousLink = countries[countries.indexOf(activeCountry) - 1].id;
-    let nextLink = countries[countries.indexOf(activeCountry) - 1].id;
+    const currentIndex = countries.indexOf(activeCountry);
+    let previousLink = countries[currentIndex > 0 ? currentIndex - 1 : countries.length - 1].id;
+    let nextLink = countries[currentIndex < countries.length - 1 ?  currentIndex + 1 : 0 ].id;
 
     return (
       <div>
@@ -49,7 +50,7 @@ class CountryDetails extends React.Component<DetailsProps> {
           <button>Next</button>
         </Link>
       </div>
-    )
+    );
   }
 }
 

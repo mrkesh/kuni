@@ -18,15 +18,15 @@ export default class List extends React.Component<ListProps> {
       <div id="list-container">
         {data.map((data, index) => {
           return (
-            <div id="list-item">
+            <div key={index} className="list-item">
               <Link to={`/${lowerCase(deburr(data.name))}`}>
                 <img src={data.flag}/>
               </Link>
               <p>{data.name}</p>
             </div>
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 }

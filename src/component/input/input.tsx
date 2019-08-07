@@ -6,11 +6,11 @@ interface InputProps {
 
 export class Input extends React.Component<InputProps> {
 
-  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     this.props.onFilter(event.target.value);
   };
 
-  onClick = (event: React.MouseEvent) => {
+  onClick = (event: React.MouseEvent): void => {
     this.props.onFilter(null);
   };
 

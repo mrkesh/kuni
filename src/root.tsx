@@ -22,7 +22,7 @@ export default class Root extends React.Component<RootProps> {
           <Route path="/:country" component={CountryDetails} />
         </Router>
       </Provider>
-    )
+    );
   }
 
 }
