@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { match } from 'react-router';
-import Country from './model/country';
+import Country from '../model/country';
 import { Link } from 'react-router-dom';
 
 interface DetailsProps {
-  match: match< { [country: string]: string }>;
+  match: match<{ [country: string]: string }>;
   countries: Country[];
+  data: { label: string, property: keyof Country }[];
 }
 
 function mapStateToProps(state: { countries: Country[] }): { countries: Country[] } {
@@ -19,7 +20,7 @@ class CountryDetails extends React.Component<DetailsProps> {
 
   render() {
 
-    const { countries, match } = this.props;
+    const { countries, data, match } = this.props;
     let countryParam = match.params.country;
 
     let activeCountry: Country | undefined = countries.find(country => {
@@ -36,13 +37,12 @@ class CountryDetails extends React.Component<DetailsProps> {
 
     return (
       <div>
-        <img src={activeCountry.flag} width={80} />
-        <p><strong>Name: </strong>{activeCountry.name}</p>
-        <p><strong>Capital: </strong>{activeCountry.capital}</p>
-        <p><strong>Population: </strong>{activeCountry.population}</p>
-        <p><strong>Area: </strong>{activeCountry.area}</p>
-        <p><strong>Region: </strong>{activeCountry.region}</p>
-
+        <img src={activeCountry.flag} height={64} />
+        {
+          data.map((element, index) => {
+            return <p key={index}><strong>{`${element.label}: `}</strong>{activeCountry[element.property]}</p>;
+          })
+        }
         <Link to={`/${previousLink}`}>
           <button disabled={false}>Previous</button>
         </Link>

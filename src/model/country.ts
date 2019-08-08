@@ -1,4 +1,4 @@
-import { deburr, lowerCase } from 'lodash';
+import { deburr, lowerCase, round } from 'lodash';
 import { CountryDataJSON } from '../service/country-service';
 
 export default class Country {
@@ -18,7 +18,7 @@ export default class Country {
   region: string;
 
   get density(): number {
-    return this.population / this.area;
+    return round(this.population / this.area, 2);
   }
 
   constructor(id: string, name: string, capital: string, area: number, population: number, region: string, flag: string) {
