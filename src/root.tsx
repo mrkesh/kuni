@@ -13,7 +13,7 @@ export default class Root extends React.Component<RootProps> {
 
   render() {
 
-    let { store } = this.props;
+    const { store } = this.props;
 
     const data = [
       { label: 'Name', property: 'name' },

@@ -3,6 +3,7 @@ node_modules
 
 # misc
 .idea
+.vscode
 *.iml
 .DS_Store
 .Trashes

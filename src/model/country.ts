@@ -1,8 +1,7 @@
-import { deburr, lowerCase, round } from 'lodash';
-import { CountryDataJSON } from '../service/country-service';
+import { deburr, lowerCase, round } from "lodash";
+import { CountryDataJSON } from "../service/country-service";
 
 export default class Country {
-
   id: string;
 
   name: string;
@@ -21,7 +20,22 @@ export default class Country {
     return round(this.population / this.area, 2);
   }
 
-  constructor(id: string, name: string, capital: string, area: number, population: number, region: string, flag: string) {
+  get formattedPopulation(): string {
+    return new Intl.NumberFormat("en-gb", {
+      notation: "compact",
+      maximumFractionDigits: 2,
+    }).format(this.population);
+  }
+
+  constructor(
+    id: string,
+    name: string,
+    capital: string,
+    area: number,
+    population: number,
+    region: string,
+    flag: string
+  ) {
     this.id = id;
     this.name = name;
     this.capital = capital;
@@ -32,7 +46,6 @@ export default class Country {
   }
 
   static fromJSON(jsonData: CountryDataJSON[]): Country[] {
-
     return jsonData.map((jsonObj) => {
       return new Country(
         deburr(lowerCase(jsonObj.name)),
@@ -41,10 +54,8 @@ export default class Country {
         jsonObj.area,
         jsonObj.population,
         jsonObj.region,
-        jsonObj.flag
+        jsonObj.flags[0]
       );
     });
-    
   }
-
 }

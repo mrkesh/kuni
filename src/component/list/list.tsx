@@ -1,32 +1,28 @@
-import { deburr, lowerCase } from 'lodash';
-import React from 'react';
-import Country from '../../model/country';
-import { Link } from 'react-router-dom';
-import './list.css';
+import { deburr, lowerCase } from "lodash";
+import React from "react";
+import Country from "../../model/country";
+import { Link } from "react-router-dom";
+import "./list.css";
 
 interface ListProps {
-  data: Country[]
+  data: Country[];
 }
 
-export default class List extends React.Component<ListProps> {
+const List: React.FC<ListProps> = ({ data }: ListProps) => {
+  return (
+    <div id="list-container">
+      {data.map((country, index) => {
+        return (
+          <div key={index} className="list-item">
+            <Link to={`/${lowerCase(deburr(country.name))}`}>
+              <img src={country.flag} />
+            </Link>
+            <p>{country.name}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
-  render() {
-
-    let { data } = this.props;
-
-    return (
-      <div id="list-container">
-        {data.map((data, index) => {
-          return (
-            <div key={index} className="list-item">
-              <Link to={`/${lowerCase(deburr(data.name))}`}>
-                <img src={data.flag}/>
-              </Link>
-              <p>{data.name}</p>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-}
+export default List;
